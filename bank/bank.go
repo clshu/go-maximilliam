@@ -3,15 +3,26 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
+
+const fileName string = "balance.txt"
+
+func readFileFRomFile() float64 {
+	data, _ := os.ReadFile(fileName)
+	balanceText := string(data)
+	balance, _ := strconv.ParseFloat(balanceText, 64)
+	return balance
+}
 
 func writeBalanceToFile(balance float64) {
 	balanceText := fmt.Sprint(balance)
-	os.WriteFile("balance.txt", []byte(balanceText), 0644)
+	os.WriteFile(fileName, []byte(balanceText), 0644)
+
 }
 
 func main() {
-	var accountBalance float64 = 1000.0
+	var accountBalance float64 = readFileFRomFile()
 
 	for {
 		fmt.Println("\nWhat do you want to do?")
