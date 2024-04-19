@@ -34,8 +34,8 @@ func main() {
 
 	if err != nil {
 		fmt.Println("ERROR")
-		fmt.Println(err)
 		fmt.Println("-------------")
+		panic(err)
 	}
 
 	for {
