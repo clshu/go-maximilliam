@@ -26,7 +26,7 @@ func main() {
 		createdAt: time.Now(),
 	}
 
-	outputUserDetails(appUser)
+	outputUserDetails(&appUser)
 }
 
 func getUserData(promptText string) string {
@@ -36,7 +36,8 @@ func getUserData(promptText string) string {
 	return value
 }
 
-func outputUserDetails(u user) {
+func outputUserDetails(u *user) {
+	// We don't need tp dereference a pointer to a struct!!!
 	fmt.Println(u.firstName)
 	fmt.Println(u.lastName)
 	fmt.Println(u.birthdate)
