@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"example.com/bank/fileops"
+	"github.com/Pallinder/go-randomdata"
 )
 
 const fileName string = "balance.txt"
@@ -14,10 +15,13 @@ func main() {
 
 	if err != nil {
 		fmt.Println("ERROR")
-		fmt.Println("-------------")
 		fmt.Println(err)
+		fmt.Println("-------------")
 		// panic(err)
 	}
+
+	fmt.Println("Welcome to Go Bank")
+	fmt.Println("Reach us 24/7", randomdata.PhoneNumber())
 
 	for {
 		displayOptions()
