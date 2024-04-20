@@ -14,6 +14,13 @@ type User struct {
 	createdAt time.Time
 }
 
+// Admin is the type for administrator
+type Admin struct {
+	email    string
+	password string
+	User     // Anonymous embedding
+}
+
 // OutputUserDetails display User details
 func (u User) OutputUserDetails() {
 	fmt.Println(u.firstName)
@@ -28,7 +35,7 @@ func (u *User) ClearUserName() {
 	u.lastName = ""
 }
 
-// New is contructor of User
+// New is the onstructor of User
 func New(firstName, lastName, birthdate string) (*User, error) {
 	if firstName == "" || lastName == "" || birthdate == "" {
 		return nil, errors.New("First name, last name and birthdate are required")
@@ -39,4 +46,18 @@ func New(firstName, lastName, birthdate string) (*User, error) {
 		birthdate: birthdate,
 		createdAt: time.Now(),
 	}, nil
+}
+
+// NewAdmin is the constructor of Admin
+func NewAdmin(email, password string) *Admin {
+	return &Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "Admin",
+			lastName:  "Admin",
+			birthdate: "01/01/1980",
+			createdAt: time.Now(),
+		},
+	}
 }
