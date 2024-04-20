@@ -10,7 +10,7 @@ import (
 const fileName string = "balance.txt"
 const defaultAmount float64 = 1000.0
 
-func readFileFRomFile() (float64, error) {
+func readFileFromFile() (float64, error) {
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		return defaultAmount, errors.New("Failed to read file")
@@ -30,20 +30,17 @@ func writeBalanceToFile(balance float64) {
 }
 
 func main() {
-	var accountBalance, err = readFileFRomFile()
+	var accountBalance, err = readFileFromFile()
 
 	if err != nil {
 		fmt.Println("ERROR")
 		fmt.Println("-------------")
-		panic(err)
+		fmt.Println(err)
+		// panic(err)
 	}
 
 	for {
-		fmt.Println("\nWhat do you want to do?")
-		fmt.Println("1. Check balance")
-		fmt.Println("2. Deposit")
-		fmt.Println("3. Withdraw money")
-		fmt.Println("4. Exit")
+		displayOptions()
 
 		var choice int
 		fmt.Print("Your choice: ")
@@ -80,5 +77,4 @@ func main() {
 		}
 
 	}
-
 }
