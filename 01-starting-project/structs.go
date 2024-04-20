@@ -12,6 +12,13 @@ type user struct {
 	createdAt time.Time
 }
 
+func (u user) outputUserDetails() {
+	fmt.Println(u.firstName)
+	fmt.Println(u.lastName)
+	fmt.Println(u.birthdate)
+	fmt.Println(u.createdAt)
+}
+
 func main() {
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
@@ -26,7 +33,7 @@ func main() {
 		createdAt: time.Now(),
 	}
 
-	outputUserDetails(&appUser)
+	appUser.outputUserDetails()
 }
 
 func getUserData(promptText string) string {
@@ -34,12 +41,4 @@ func getUserData(promptText string) string {
 	var value string
 	fmt.Scan(&value)
 	return value
-}
-
-func outputUserDetails(u *user) {
-	// We don't need tp dereference a pointer to a struct!!!
-	fmt.Println(u.firstName)
-	fmt.Println(u.lastName)
-	fmt.Println(u.birthdate)
-	fmt.Println(u.createdAt)
 }
