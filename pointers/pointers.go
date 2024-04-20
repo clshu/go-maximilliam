@@ -11,10 +11,10 @@ func main() {
 
 	fmt.Println("Age:", *agePointer)
 	fmt.Println("Age Pinter:", agePointer)
-	adultYear := getAdultYear(age)
+	adultYear := getAdultYear(agePointer)
 	fmt.Println("Adult Year:", adultYear)
 }
 
-func getAdultYear(age int) int {
-	return age - 18
+func getAdultYear(age *int) int {
+	return *age - 18
 }
