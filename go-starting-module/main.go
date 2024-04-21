@@ -21,6 +21,13 @@ func main() {
 	}
 
 	userNote.Display()
+	err = userNote.Save()
+	if err != nil {
+		fmt.Println("\nSaving the node failed")
+		return
+	}
+
+	fmt.Println("\nSaving the node succeeded")
 }
 
 func getUserINput(prompt string) string {
@@ -33,8 +40,7 @@ func getUserINput(prompt string) string {
 		return ""
 	}
 
-	text = strings.TrimSuffix(text, "\n")
-	text = strings.TrimSuffix(text, "\r")
+	text = strings.TrimRight(text, "\n\r")
 
 	return text
 }
