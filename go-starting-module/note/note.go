@@ -11,9 +11,9 @@ import (
 
 // Note contains a note's info
 type Note struct {
-	Title     string
-	Content   string
-	CreatedAt time.Time
+	Title     string    `json:"title"`
+	Content   string    `json:"context"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // Display displays struct Note
