@@ -1,44 +1,38 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+
+	"example.com/go-project/note"
 )
 
 func main() {
 
-	title, content, err := getNoteData()
+	title, content := getNoteData()
+
+	userNote, err := note.New(title, content)
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	result := fmt.Sprintf("title: %s\ncontent: %s\n", title, content)
-	fmt.Print(result)
+	fmt.Print(userNote)
 }
 
-func getUserINput(prompt string) (string, error) {
+func getUserINput(prompt string) string {
 	fmt.Print(prompt)
 	var value string
 	fmt.Scanln(&value)
 
-	if value == "" {
-		return "", errors.New("Empty string. Invalid input")
-	}
-
-	return value, nil
+	return value
 }
 
-func getNoteData() (string, string, error) {
-	title, err := getUserINput("Note title: ")
-	if err != nil {
-		return "", "", err
-	}
-	content, err := getUserINput("Note content: ")
-	if err != nil {
-		return "", "", err
-	}
+func getNoteData() (string, string) {
+	title := getUserINput("Note title: ")
 
-	return title, content, nil
+	content := getUserINput("Note content: ")
+
+	return title, content
 
 }
