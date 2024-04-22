@@ -10,7 +10,20 @@ import (
 	"example.com/note/todo"
 )
 
+// Saver define save() to save struct info
+type saver interface {
+	Save() error
+}
+type outputtable interface {
+	saver
+	Display()
+}
+
 func main() {
+
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Gen")
 
 	todoText := getUserInput("Todo: ")
 
@@ -21,15 +34,10 @@ func main() {
 		return
 	}
 
-	todo.Display()
-	todo.Save()
-
+	err = outputData(todo)
 	if err != nil {
-		fmt.Println("Saving the todo failed.")
 		return
 	}
-
-	fmt.Println("Saving the todo succeeded!")
 
 	title, content := getNoteData()
 
@@ -40,17 +48,28 @@ func main() {
 		return
 	}
 
-	userNote.Display()
-	err = userNote.Save()
+	outputData(userNote)
+}
+
+func printSomething(value interface{}) {
+	fmt.Println(value)
+}
+
+func outputData(data outputtable) error {
+	data.Display()
+	return data.Save()
+
+}
+func saveData(data saver) error {
+	err := data.Save()
 
 	if err != nil {
 		fmt.Println("Saving the note failed.")
-		return
+		return err
 	}
 
-	fmt.Println("Saving the note succeeded!")
+	return nil
 }
-
 func getNoteData() (string, string) {
 	title := getUserInput("Note title:")
 	content := getUserInput("Note content:")
